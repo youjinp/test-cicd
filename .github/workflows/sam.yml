@@ -1,7 +1,8 @@
 name: sam
-on: pull_request
-  branches:
-    - master
+on: 
+  pull_request:
+    branches: 
+      - master
 
 jobs:
   deploy sam:
