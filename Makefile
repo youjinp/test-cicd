@@ -27,7 +27,7 @@ deploy api:
 	sam package \
 		--s3-bucket $${DEPLOYMENT_BUCKET_NAME}-$${AWS_REGION} \
 		--region $${AWS_REGION} \
-		--output-template-file packaged.yaml && \
+		--output-template-file packaged.yaml
 
 	sam deploy \
 		--s3-bucket $${DEPLOYMENT_BUCKET_NAME}-$${AWS_REGION} \
