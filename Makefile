@@ -23,7 +23,7 @@ deploy.createDeploymentBucket:
 		echo Bucket exists; \
 	fi
 
-deploy api:
+deploy.api:
 	sam package \
 		--s3-bucket $${DEPLOYMENT_BUCKET_NAME}-$${AWS_REGION} \
 		--region $${AWS_REGION} \
