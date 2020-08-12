@@ -12,8 +12,8 @@ jobs:
 
       - name: role
         run: |
-          chmod +x ./github/scripts/aws-cli-assumerole.sh
-          source ./github/scripts/aws-cli-assumerole.sh
+          chmod +x .github/scripts/aws-cli-assumerole.sh
+          source .github/scripts/aws-cli-assumerole.sh
 
       - name: deploy
         run: make deploy
