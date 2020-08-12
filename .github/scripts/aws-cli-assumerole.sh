@@ -2,7 +2,7 @@ unset  AWS_SESSION_TOKEN
 
 temp_role=$(aws sts assume-role \
                     --role-arn "${TEST_ROLE}" \
-                    --role-session-name "github-action-test"
+                    --role-session-name "github-action-test")
 
 AWS_ACCESS_KEY_ID=$(echo $temp_role | jq .Credentials.AccessKeyId | xargs)
 AWS_SECRET_ACCESS_KEY=$(echo $temp_role | jq .Credentials.SecretAccessKey | xargs)
