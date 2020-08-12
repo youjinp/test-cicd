@@ -1,6 +1,6 @@
 .PHONY: build
 
-export DEPLOYMENT_BUCKET_NAME = test-cicd-20200813-deployment
+export DEPLOYMENT_BUCKET_NAME = test-cicd-20200813-deployment-test
 export STACK_NAME = test-cicd-20200811
 export AWS_REGION = ap-southeast-2
 export AWS_BRANCH = develop
