@@ -1,4 +1,4 @@
-name: hello
+name: which branch
 on: [pull_request, push]
 
 jobs:
@@ -12,3 +12,6 @@ jobs:
 
       - name: Get branch name
         run: echo 'The branch name is' $BRANCH_NAME
+
+      - name: Print branch name
+        run: echo 'The env branch name is' $GITHUB_HEAD_REF
