@@ -1,4 +1,4 @@
-name: which branch
+name: whichBranch
 on: [pull_request, push]
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
       # only shows on pull request
       - name: Print branch name
         if: github.event_name == 'pull_request'
-        run: echo "::set-env name=BRANCH_NAME::$(echo ${$GITHUB_HEAD_REF})"
+        run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_HEAD_REF})"
 
       - name: Get branch name
         run: echo 'The branch name is' $BRANCH_NAME
