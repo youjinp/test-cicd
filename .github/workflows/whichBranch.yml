@@ -5,13 +5,17 @@ jobs:
   which_branch:
     runs-on: ubuntu-latest
     steps:
+      # on pull request -> refs/pull/3/merge
       - name: Extract branch name
+        if: github.event_name == 'push'
         shell: bash
         run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
 
+      # only shows on pull request
+      - name: Print branch name
+        if: github.event_name == 'pull_request'
+        run: echo "::set-env name=BRANCH_NAME::$(echo ${$GITHUB_HEAD_REF})"
+
       - name: Get branch name
         run: echo 'The branch name is' $BRANCH_NAME
-
-      - name: Print branch name
-        run: echo 'The env branch name is' $GITHUB_HEAD_REF
