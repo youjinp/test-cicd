@@ -7,5 +7,9 @@ jobs:
     steps:
       - name: check
         run: |
-          [[ $BRANCH == "master" ]] && echo "::set-env name=ROLE::${AWS_PRODUCTION_ROLE}"
-          [[ $BRANCH == "integration" ]] && echo "::set-env name=ROLE::${AWS_INTEGRATION_ROLE}"
+          echo "::set-env name=BRANCH::master"
+
+      - name: check
+        run: |
+          [[ $BRANCH == "master" ]] && echo "::set-env name=ROLE::A"
+          [[ $BRANCH == "integration" ]] && echo "::set-env name=ROLE::B"
