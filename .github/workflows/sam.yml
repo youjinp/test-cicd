@@ -1,7 +1,7 @@
 name: sam
-on: 
+on:
   pull_request:
-    branches: 
+    branches:
       - master
 
 jobs:
@@ -9,6 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - name: role
+        run: |
+          chmod +x .github/scripts/aws-cli-assumerole.sh
+          source .github/scripts/aws-cli-assumerole.sh
+
       - name: deploy
         run: make deploy
 
@@ -16,3 +22,4 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_DEFAULT_REGION: ap-southeast-2
+  TEST_ROLE: arn:aws:iam::156409632594:role/githubci_role

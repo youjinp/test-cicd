@@ -1,6 +1,6 @@
 .PHONY: build
 
-export DEPLOYMENT_BUCKET_NAME = test-cicd-20200811-deployment
+export DEPLOYMENT_BUCKET_NAME = test-cicd-20200813-deployment-test
 export STACK_NAME = test-cicd-20200811
 export AWS_REGION = ap-southeast-2
 export AWS_BRANCH = develop
@@ -23,7 +23,7 @@ deploy.createDeploymentBucket:
 		echo Bucket exists; \
 	fi
 
-deploy api:
+deploy.api:
 	sam package \
 		--s3-bucket $${DEPLOYMENT_BUCKET_NAME}-$${AWS_REGION} \
 		--region $${AWS_REGION} \
