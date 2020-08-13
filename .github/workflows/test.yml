@@ -1,4 +1,4 @@
-name: hello
+name: test
 on: push
 
 jobs:
@@ -7,5 +7,5 @@ jobs:
     steps:
       - name: check
         run: |
-          [[ $BRANCH == "master" ]] && { echo "::set-env name=ROLE::${AWS_PRODUCTION_ROLE}" }
-          [[ $BRANCH == "integration" ]] && { echo "::set-env name=ROLE::${AWS_INTEGRATION_ROLE}" }
+          [[ $BRANCH == "master" ]] && echo "::set-env name=ROLE::${AWS_PRODUCTION_ROLE}"
+          [[ $BRANCH == "integration" ]] && echo "::set-env name=ROLE::${AWS_INTEGRATION_ROLE}"
