@@ -10,6 +10,7 @@ jobs:
           echo "::set-env name=BRANCH::master"
 
       - name: check
+        shell: bash
         run: |
           [[ $BRANCH == "master" ]] && echo "::set-env name=ROLE::A"
           [[ $BRANCH == "integration" ]] && echo "::set-env name=ROLE::B"
