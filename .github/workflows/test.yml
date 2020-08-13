@@ -12,7 +12,7 @@ jobs:
       - name: check
         run: |
           [[ $BRANCH == "master" ]] && echo "::set-env name=ROLE::A"
-          [[ $BRANCH == "master" ]] && echo "::set-env name=ROLE::A"
+          [[ $BRANCH == "integration" ]] && echo "::set-env name=ROLE::B"
 
       - name: print
         run: |
