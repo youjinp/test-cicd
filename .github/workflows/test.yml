@@ -12,6 +12,7 @@ jobs:
       - name: check
         run: |
           [[ $BRANCH == "master" ]] && echo "::set-env name=ROLE::A"
+          [[ $BRANCH == "master" ]] && echo "::set-env name=ROLE::A"
 
       - name: print
         run: |
