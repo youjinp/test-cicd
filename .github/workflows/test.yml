@@ -5,9 +5,9 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: check
-        run: |
-          echo "::set-env name=BRANCH::master"
+      # - name: check
+      #   run: |
+      #     echo "::set-env name=BRANCH::master"
 
       - name: check
         run: |
