@@ -11,8 +11,11 @@ jobs:
 
       - name: check
         run: |
-          [[ $BRANCH == "master" ]] && echo "::set-env name=ROLE::A"
-          [[ $BRANCH == "master" ]] && echo "::set-env name=ROLE::B"
+          if [[ $BRANCH == "master" ]]; then
+            echo "::set-env name=ROLE::PRODUCTION"
+          elif [[ $BRANCH == "integration" ]]; then
+            echo "::set-env name=ROLE::INTEGRATION"
+          fi
 
       - name: print
         run: |
