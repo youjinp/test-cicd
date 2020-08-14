@@ -30,3 +30,20 @@ jobs:
           cd hello-world && \
           go get -u ... && \
           GOOS=linux GOARCH=amd64 go build -o main
+
+      - name: multiline
+        id: multiline
+        run: |
+          description="This is line one\n
+                    this is line two\n
+                    this is line three"
+          description1="${description1//'%'/'%25'}"
+          description1="${description1//'\n'/'%0A'}"
+          description1="${description1//'\r'/'%0D'}"
+          echo "::set-output name=description::$description"
+          echo "::set-output name=description1::$description1"
+
+      - name: print
+        run: |
+          echo ${{ steps.multiline.outputs.description }}
+          echo ${{ steps.multiline.outputs.description1 }}
