@@ -14,6 +14,19 @@ jobs:
   say_hello:
     runs-on: ubuntu-latest
     steps:
+      # extract branch name
+      - name: Extract branch name
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: echo "::set-env name=BRANCH::$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
+      # extract branch name on pull request
+      - name: Extract branch name
+        if: github.event_name == 'pull_request'
+        run: echo "::set-env name=BRANCH::$(echo ${GITHUB_HEAD_REF})"
+
       - run: |
+          echo "You're on $BRANCH!"
           echo "Hello ${{ github.event.inputs.name }}!"
           echo "- in ${{ github.event.inputs.home }}!"
