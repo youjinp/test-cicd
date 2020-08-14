@@ -1,0 +1,49 @@
+name: test
+on: push
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout branch
+      - uses: actions/checkout@v2
+
+      - name: check
+        run: |
+          echo "::set-env name=BRANCH::master"
+
+      - name: check
+        run: |
+          if [[ $BRANCH == "master" ]]; then
+            echo "::set-env name=ROLE::PRODUCTION"
+          elif [[ $BRANCH == "integration" ]]; then
+            echo "::set-env name=ROLE::INTEGRATION"
+          fi
+
+      - name: print
+        if: env.BRANCH == 'master'
+        run: |
+          echo "Role is ${ROLE}"
+
+      # - name: build
+      #   run: |
+      #     cd hello-world && \
+      #     go get -u ... && \
+      #     GOOS=linux GOARCH=amd64 go build -o main
+
+      - name: multiline
+        id: multiline
+        run: |
+          description="This is line one
+                    this is line two
+                    this is line three"
+          description1="${description//'%'/'%25'}"
+          description1="${description1//$'\n'/'%0A'}"
+          description1="${description1//$'\r'/'%0D'}"
+          echo "::set-output name=description::$description"
+          echo "::set-output name=description1::$description1"
+
+      - name: print
+        run: |
+          echo "${{ steps.multiline.outputs.description }}"
+          echo "${{ steps.multiline.outputs.description1 }}"

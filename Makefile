@@ -24,6 +24,11 @@ deploy.createDeploymentBucket:
 	fi
 
 deploy.api:
+	$(info [*] Deploying geoip...)
+	@cd hello-world && \
+		go mod tidy && \
+ 		GOOS=linux GOARCH=amd64 go build -o main
+
 	sam package \
 		--s3-bucket $${DEPLOYMENT_BUCKET_NAME}-$${AWS_REGION} \
 		--region $${AWS_REGION} \
