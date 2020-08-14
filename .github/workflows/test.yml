@@ -21,3 +21,8 @@ jobs:
         if: env.BRANCH == 'master'
         run: |
           echo "Role is ${ROLE}"
+
+      - name: build
+        run: |
+          cd hello-world && \
+          GOOS=linux GOARCH=amd64 go build -o main
