@@ -34,8 +34,8 @@ jobs:
       - name: multiline
         id: multiline
         run: |
-          description="This is line one\n
-                    this is line two\n
+          description="This is line one
+                    this is line two
                     this is line three"
           description1="${description//'%'/'%25'}"
           description1="${description1//$'\n'/'%0A'}"
@@ -45,5 +45,5 @@ jobs:
 
       - name: print
         run: |
-          echo ${{ steps.multiline.outputs.description }}
-          echo ${{ steps.multiline.outputs.description1 }}
+          echo "${{ steps.multiline.outputs.description }}"
+          echo "${{ steps.multiline.outputs.description1 }}"
