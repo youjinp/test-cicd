@@ -27,6 +27,14 @@ Resources:
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           PARAM1: VALUE
+      Policies:
+        - AWSLambdaExecute # Managed Policy
+        - Version: "2012-10-17" # Policy Document
+          Statement:
+            - Effect: Allow
+              Action:
+                - sts:AssumeRole
+              Resource: "arn:aws:iam::556352520741:role/access-database-role"
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
