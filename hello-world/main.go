@@ -1,13 +1,15 @@
 package main
 
 import (
+	"context"
 	"errors"
 	"fmt"
-	"io/ioutil"
-	"net/http"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
+	"github.com/aws/aws-sdk-go/aws"
 )
 
 var (
@@ -21,27 +23,35 @@ var (
 	ErrNon200Response = errors.New("Non 200 Response found")
 )
 
-func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	resp, err := http.Get(DefaultHTTPGetAddress)
+func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+
+	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
-		return events.APIGatewayProxyResponse{}, err
+		panic(err)
 	}
+	dynamodbClient := dynamodb.New(cfg)
 
-	if resp.StatusCode != 200 {
-		return events.APIGatewayProxyResponse{}, ErrNon200Response
-	}
+	req := dynamodbClient.GetItemRequest(&dynamodb.GetItemInput{
+		TableName: aws.String("GeoIP-2020-05-29"),
+		Key: map[string]dynamodb.AttributeValue{
+			"networkHead": {
+				N: aws.String("187"),
+			},
+			"firstIP": {
+				N: aws.String("3137339392"),
+			},
+		},
+	})
 
-	ip, err := ioutil.ReadAll(resp.Body)
+	res, err := req.Send(ctx)
 	if err != nil {
-		return events.APIGatewayProxyResponse{}, err
+		panic(err)
 	}
 
-	if len(ip) == 0 {
-		return events.APIGatewayProxyResponse{}, ErrNoIP
-	}
+	fmt.Println("res: ", res.Item)
 
 	return events.APIGatewayProxyResponse{
-		Body:       fmt.Sprintf("Hello, %v", string(ip)),
+		Body:       fmt.Sprintf("Hello"),
 		StatusCode: 200,
 	}, nil
 }
