@@ -24,11 +24,9 @@ deploy.createDeploymentBucket:
 	fi
 
 deploy.api:
-
-
 	$(info [*] Deploying geoip...)
 	@cd hello-world && \
-		go get -u github.com/notchhq/... && \
+		go get -u ... && \
 		go mod tidy && \
  		GOOS=linux GOARCH=amd64 go build -o cmd/main ./cmd
 
