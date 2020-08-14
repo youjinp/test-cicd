@@ -5,6 +5,9 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+      # checkout branch
+      - uses: actions/checkout@v2
+
       - name: check
         run: |
           echo "::set-env name=BRANCH::master"
