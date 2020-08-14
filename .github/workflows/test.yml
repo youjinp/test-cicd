@@ -25,11 +25,11 @@ jobs:
         run: |
           echo "Role is ${ROLE}"
 
-      - name: build
-        run: |
-          cd hello-world && \
-          go get -u ... && \
-          GOOS=linux GOARCH=amd64 go build -o main
+      # - name: build
+      #   run: |
+      #     cd hello-world && \
+      #     go get -u ... && \
+      #     GOOS=linux GOARCH=amd64 go build -o main
 
       - name: multiline
         id: multiline
@@ -37,7 +37,7 @@ jobs:
           description="This is line one\n
                     this is line two\n
                     this is line three"
-          description1="${description1//'%'/'%25'}"
+          description1="${description//'%'/'%25'}"
           description1="${description1//'\n'/'%0A'}"
           description1="${description1//'\r'/'%0D'}"
           echo "::set-output name=description::$description"
